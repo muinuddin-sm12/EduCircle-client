@@ -161,7 +161,7 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <div className="flex dark:bg-[#1979C1] px-6 py-2 rounded-full items-center gap-3">
+          <div className="flex bg-[#1979C1] px-6 py-2 rounded-full items-center gap-3">
             <Link to="/login">
               <button>Login</button>
             </Link>

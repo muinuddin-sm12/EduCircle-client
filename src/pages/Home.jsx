@@ -1,10 +1,11 @@
+import Faq from "../components/Faq";
 
 
 
 const Home = () => {
     return (
         <div>
-            Home Page
+            <Faq/>
         </div>
     );
 };
