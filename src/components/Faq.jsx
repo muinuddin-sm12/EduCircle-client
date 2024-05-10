@@ -2,7 +2,7 @@
 
 const Faq = () => {
     return (
-        <div className="bg-pink-300">
+        <div className="h-[500px]">
             Faq section
         </div>
     );

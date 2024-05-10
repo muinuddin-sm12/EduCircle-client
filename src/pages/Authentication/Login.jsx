@@ -1,13 +1,14 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../provider/AuthProvider";
+
 import toast from "react-hot-toast";
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
 
     const navigate = useNavigate();
-    const {  user ,signInWithGoogle } = useContext(AuthContext);
+    const {  signIn ,user ,signInWithGoogle,  } = useContext(AuthContext);
     useEffect(() => {
         if (user) {
           navigate("/");
@@ -25,6 +26,22 @@ const Login = () => {
       toast.error(err?.message);
     }
   };
+  // email password SignIn
+  const handlePasswordSignIn = async e => {
+    e.preventDefault()
+    const form = e.target
+    const email = form.email.value 
+    const pass = form.password.value 
+    try {
+      const result = await signIn(email, pass);
+      console.log(result);
+      navigate(from, { replace: true });
+      toast.success("SignIn Successful");
+    } catch (err) {
+      toast.error(err?.message);
+    }
+  }
+  // if(user || loading) return 
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh-306px)]'>
       <div className='flex w-full mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-md '>
@@ -77,7 +94,7 @@ const Login = () => {
 
             <span className='w-1/5 border-b dark:border-gray-400 lg:w-1/4'></span>
           </div>
-          <form>
+          <form onSubmit={handlePasswordSignIn}>
             <div className='mt-4'>
               <label
                 className='block mb-2 text-sm font-medium text-gray-600 '
@@ -126,7 +143,7 @@ const Login = () => {
             <span className='w-1/5 border-b  md:w-1/4'></span>
 
             <Link
-              to='/registration'
+              to='/register'
               className='text-xs text-gray-500 uppercase  hover:underline'
             >
               or sign up

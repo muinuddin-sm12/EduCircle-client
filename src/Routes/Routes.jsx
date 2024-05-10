@@ -4,6 +4,7 @@ import Login from "../pages/Authentication/Login";
 import CreateAssignment from "../pages/CreateAssignment";
 import Home from "../pages/Home";
 import PrivateRoutes from "./PrivateRoutes";
+import Register from "../pages/Authentication/Register";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path : "/register",
+        element: <Register/>
+      }
     ],
   },
 ]);
