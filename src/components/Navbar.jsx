@@ -3,6 +3,7 @@ import logo from "../assets/images/logo.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import DropDownProfile from "./DropDownProfile";
+import ThemeControlerBtn from "./ThemeControlerBtn";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
@@ -144,6 +145,7 @@ const Navbar = () => {
         <div className="mr-4 mt-2 hidden md:block">
           <div onClick={() => setIsDarkMode(!isDarkMode)}>
             {/* Theme controler button */}
+            <ThemeControlerBtn/>
           </div>
         </div>
         {user ? (
