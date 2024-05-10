@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.dropDownProfile{
+    position: absolute;
+    top: 5.4rem;
+    right: 2.2rem;
+    /* min-width: 120px; */
+    width: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(8, 87, 118, 0.17);
+    border: 1px solid gray;
+  }
+  .dropDownProfile::before {
+    content: '';
+    position: absolute;
+    top: -0.7rem;
+    right: 1.1rem;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    border-left: 1px solid gray;
+    border-top: 1px solid gray;
+  }
+  
+  @media screen and (max-width: 680px) {
+    .dropDownProfile{
+        top: 5.6rem;
+        right: .8rem;
+        min-width: 150px;
+      }
+  }
