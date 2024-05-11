@@ -1,14 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
-import { toast } from "react-toastify";
-import logo from '../../assets/images/logo.png'
+
+import logo from "../../assets/images/logo.png";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile, user, setUser } =
+  const { signInWithGoogle, createUser, updateUserProfile, user, setUser, } =
     useContext(AuthContext);
-  const location = useLocation();
+    const [error, setError] = useState("");
+    const location = useLocation();
   const from = location.state || "/";
 
   const handleSingUp = async (event) => {
@@ -18,6 +20,17 @@ const Register = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const pass = form.password.value;
+    if (pass.length < 6) {
+        setError("Password must be at least 6 Character!");
+        return;
+      } else if (!/^(?=.*[A-Z]).+$/.test(pass)) {
+        setError("Password must have an Uppercase letter!");
+        return;
+      } else if (!/^(?=.*[a-z]).+$/.test(pass)) {
+        setError("Password must have an Lowercase letter");
+        return;
+      }
+      setError("");
     try {
       const result = await createUser(email, pass);
       console.log(result);
@@ -44,11 +57,7 @@ const Register = () => {
       <div className=" w-full  mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-lg ">
         <div className="w-full px-6 py-8 md:px-8">
           <div className="flex justify-center mx-auto">
-            <img
-              className='w-auto h-10 sm:h-14'
-              src={logo}
-              alt='logo'
-            />
+            <img className="w-auto h-10 sm:h-14" src={logo} alt="logo" />
           </div>
 
           <p className="mt-3 text-xl text-center text-gray-600 ">
@@ -159,6 +168,7 @@ const Register = () => {
                 type="password"
               />
             </div>
+            {error && <small className="text-red-600">{error}</small>}
             <div className="mt-6">
               <button
                 type="submit"

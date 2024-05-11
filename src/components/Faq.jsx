@@ -2,7 +2,7 @@
 
 const Faq = () => {
     return (
-        <div className="h-[500px]">
+        <div className="">
             Faq section
         </div>
     );
