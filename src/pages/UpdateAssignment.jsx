@@ -1,53 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { AuthContext } from "../provider/AuthProvider";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
-const CreateAssignment =  () => {
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const [startDate, setStartDate] = useState(new Date());
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const assignment_title = form.assignment_title.value;
-    const marks = form.marks.value;
-    const img_url = form.image_url.value;
-    const difficulty_level = form.difficulty_level.value;
-    const email = form.email.value;
-    const due_date = startDate;
-    const description = form.description.value;
-    const assignmentData = {
-      assignment_title,
-      marks,
-      img_url,
-      difficulty_level,
-      email,
-      due_date,
-      description,
-    };
-    console.log(assignmentData);
-    try{
-      const {data} = await axios.post('http://localhost:7000/assignments', assignmentData)
-      console.log(data)
-      toast.success('Assignment Created Successfully!')
-      form.reset()
-      navigate('/assignments')
-    }catch(err){
-      console.log(err.message)
-    }
-  };
-  return (
-    <div className="flex justify-center text-sans bg-[#1978c12e] items-center py-12">
+
+const UpdateAssignment = () => {
+    const [startDate, setStartDate] = useState();
+
+    return (
+        <div className="flex justify-center text-sans bg-[#1978c12e] items-center py-12">
       <section className=" p-2 md:p-6 mx-auto bg-white rounded-md shadow-md ">
         <h2 className="text-lg font-semibold text-gray-700 capitalize ">
           Create an Assignment
         </h2>
 
-        <form onSubmit={handleFormSubmit}>
+        <form >
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-gray-700 " htmlFor="job_title">
@@ -109,7 +74,7 @@ const CreateAssignment =  () => {
                 id="emailAddress"
                 type="email"
                 name="email"
-                defaultValue={user?.email}
+                // defaultValue={user?.email}
                 disabled
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
@@ -143,7 +108,7 @@ const CreateAssignment =  () => {
         </form>
       </section>
     </div>
-  );
+    );
 };
 
-export default CreateAssignment;
+export default UpdateAssignment;
