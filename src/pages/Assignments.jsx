@@ -20,6 +20,18 @@ const Assignments = () => {
   // delete assignment
   const handleDelete = async (id) => {
     try {
+      // Fetch the assignment data
+      const response = await fetch(`http://localhost:7000/assignments/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch assignment data");
+      }
+      const data = await response.json();
+
+      // Check if the assignment's email matches the user's email
+      if (data.email !== user.email) {
+        toast.error("You are not authorized to delete this assignment");
+        return;
+      }
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",

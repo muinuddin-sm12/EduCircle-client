@@ -1,10 +1,26 @@
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
+import { useLoaderData } from "react-router-dom";
+// import { AuthContext } from "../provider/AuthProvider";
 
 
 const UpdateAssignment = () => {
-    const [startDate, setStartDate] = useState();
+    // const {user} = useContext(AuthContext)
+    const assignmentData = useLoaderData()
+    const {assignment_title, marks, img_url,email, difficulty_level, due_date, description } = assignmentData || {}
+    const [startDate, setStartDate] = useState(new Date(due_date) || new Date())
 
+    const handleFormSubmit = async event => {
+        event.preventDefault()
+        const form = event.target 
+        const assignment_title = form.assignment_title.value 
+        const marks = form.marks.value 
+        const img_url = form.img_url.value 
+        const due_date = form.due_date.value 
+        const description = form.description.value 
+        const updateData = {assignment_title, marks, img_url, due_date, description}
+        console.log(updateData)
+    }
     return (
         <div className="flex justify-center text-sans bg-[#1978c12e] items-center py-12">
       <section className=" p-2 md:p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -12,7 +28,7 @@ const UpdateAssignment = () => {
           Create an Assignment
         </h2>
 
-        <form >
+        <form onSubmit={handleFormSubmit}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-gray-700 " htmlFor="job_title">
@@ -22,7 +38,7 @@ const UpdateAssignment = () => {
                 id="assignment_title"
                 name="assignment_title"
                 type="text"
-                required
+                defaultValue={assignment_title}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
@@ -34,7 +50,7 @@ const UpdateAssignment = () => {
                 id="marks"
                 name="marks"
                 type="number"
-                required
+                defaultValue={marks}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
@@ -46,7 +62,7 @@ const UpdateAssignment = () => {
                 id="image_url"
                 name="image_url"
                 type="text"
-                required
+                defaultValue={img_url}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
@@ -59,7 +75,7 @@ const UpdateAssignment = () => {
                 name="difficulty_level"
                 id="difficulty_level"
                 className="border p-2 rounded-md"
-                required
+                defaultValue={difficulty_level}
               >
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
@@ -74,7 +90,7 @@ const UpdateAssignment = () => {
                 id="emailAddress"
                 type="email"
                 name="email"
-                // defaultValue={user?.email}
+                defaultValue={email}
                 disabled
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
@@ -85,7 +101,6 @@ const UpdateAssignment = () => {
                 className="border p-2 rounded-md"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                required
               />
             </div>
           </div>
@@ -97,12 +112,13 @@ const UpdateAssignment = () => {
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               name="description"
               id="description"
+              defaultValue={description}
               required
             ></textarea>
           </div>
           <div className="flex justify-end mt-6">
             <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-[#1979C1] rounded-md hover:bg-[#FCB138]  focus:outline-none focus:bg-gray-600">
-              Create
+              Update
             </button>
           </div>
         </form>
