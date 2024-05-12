@@ -27,7 +27,6 @@ const Assignments = () => {
       }
       const data = await response.json();
 
-      // Check if the assignment's email matches the user's email
       if (data.email !== user.email) {
         toast.error("You are not authorized to delete this assignment");
         return;
@@ -105,6 +104,7 @@ const Assignments = () => {
 
             <div>
               <div className="mt-4 text-gray-700 dark:text-gray-200">
+                <h1 className="font-medium pb-2">Marks: <span>{singleData.marks}</span></h1>
                 <h1 title={singleData.description} className="text-sm">
                   {singleData.description.slice(0, 60)}..
                 </h1>

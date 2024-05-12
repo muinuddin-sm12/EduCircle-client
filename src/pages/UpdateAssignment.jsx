@@ -1,13 +1,16 @@
+import axios from "axios";
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import { useLoaderData } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useLoaderData, useNavigate } from "react-router-dom";
 // import { AuthContext } from "../provider/AuthProvider";
 
 
 const UpdateAssignment = () => {
     // const {user} = useContext(AuthContext)
+    const navigate = useNavigate();
     const assignmentData = useLoaderData()
-    const {assignment_title, marks, img_url,email, difficulty_level, due_date, description } = assignmentData || {}
+    const {_id ,assignment_title, marks, img_url,email, difficulty_level, due_date, description } = assignmentData || {}
     const [startDate, setStartDate] = useState(new Date(due_date) || new Date())
 
     const handleFormSubmit = async event => {
@@ -15,11 +18,19 @@ const UpdateAssignment = () => {
         const form = event.target 
         const assignment_title = form.assignment_title.value 
         const marks = form.marks.value 
-        const img_url = form.img_url.value 
-        const due_date = form.due_date.value 
+        const img_url = form.image_url.value 
+        const due_date = startDate 
         const description = form.description.value 
         const updateData = {assignment_title, marks, img_url, due_date, description}
-        console.log(updateData)
+        // console.log(updateData)
+        try {
+            const {data} = await axios.put(`http://localhost:7000/assignments/${_id}`, updateData)
+            console.log(data)
+            toast.success('Assignment Updated!')
+            navigate('/assignments')
+        }catch(err){
+            console.log(err.message)
+        }
     }
     return (
         <div className="flex justify-center text-sans bg-[#1978c12e] items-center py-12">
