@@ -19,9 +19,10 @@ const UpdateAssignment = () => {
         const assignment_title = form.assignment_title.value 
         const marks = form.marks.value 
         const img_url = form.image_url.value 
+        const difficulty_level = form.difficulty_level.value 
         const due_date = startDate 
         const description = form.description.value 
-        const updateData = {assignment_title, marks, img_url, due_date, description}
+        const updateData = {assignment_title, marks, img_url,difficulty_level, due_date, description}
         // console.log(updateData)
         try {
             const {data} = await axios.put(`http://localhost:7000/assignments/${_id}`, updateData)

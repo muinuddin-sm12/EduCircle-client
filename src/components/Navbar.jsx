@@ -16,7 +16,7 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="navbar sticky top-0 bg-base-100 max-w-[1536px] mx-auto px-4 md:px-10 py-5 mb-2">
+    <div className="navbar sticky top-0 bg-base-100 z-[99] max-w-[1536px] mx-auto px-4 md:px-10 py-5 mb-2">
       <div className="navbar-start">
         <div className="dropdown">
           <div

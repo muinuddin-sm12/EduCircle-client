@@ -69,17 +69,17 @@ const Assignments = () => {
       {data.map((singleData) => (
         <div
           key={singleData._id}
-          className="w-full max-w-sm mx-auto rounded-lg overflow-hidden bg-white shadow-lg dark:bg-gray-800"
+          className="w-full max-w-sm mx-auto rounded-lg overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800"
         >
           <img
-            className="object-cover object-center border-b-[1px] border-gray-100 w-full h-44"
+            className="object-cover object-center border-b-[1px] border-gray-500 w-full h-44"
             src={singleData?.img_url}
             alt="Assignment Picture"
           />
 
           <div className="flex flex-col px-6 py-4">
             <div className="flex justify-between items-center">
-              <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
+              <h1 className="text-xl font-semibold">
                 {singleData.assignment_title}
               </h1>
               <span
@@ -103,7 +103,7 @@ const Assignments = () => {
             </div>
 
             <div>
-              <div className="mt-4 text-gray-700 dark:text-gray-200">
+              <div className="mt-4">
                 <h1 className="font-medium pb-2">Marks: <span>{singleData.marks}</span></h1>
                 <h1 title={singleData.description} className="text-sm">
                   {singleData.description.slice(0, 60)}..

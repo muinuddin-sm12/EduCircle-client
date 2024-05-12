@@ -7,11 +7,13 @@ import PrivateRoutes from "./PrivateRoutes";
 import Register from "../pages/Authentication/Register";
 import Assignments from "../pages/Assignments";
 import UpdateAssignment from "../pages/UpdateAssignment";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         index: true,
