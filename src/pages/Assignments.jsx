@@ -11,18 +11,23 @@ import ScrollToTop from "../components/ScrollToTop";
 const Assignments = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
+  const [filter, setFilter] = useState("");
   useEffect(() => {
     getData();
-  }, [user]);
+  }, [user, filter]);
   const getData = async () => {
-    const { data } = await axios("https://edu-circle-server.vercel.app/assignments");
+    const { data } = await axios(
+      "https://edu-circle-server.vercel.app/assignments"
+    );
     setData(data);
   };
   // delete assignment
   const handleDelete = async (id) => {
     try {
       // Fetch the assignment data
-      const response = await fetch(`https://edu-circle-server.vercel.app/assignments/${id}`);
+      const response = await fetch(
+        `https://edu-circle-server.vercel.app/assignments/${id}`
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch assignment data");
       }
@@ -65,29 +70,50 @@ const Assignments = () => {
       toast.error(err.message);
     }
   };
+  const filteredAssignments = filter
+    ? data.filter((assignment) => assignment.difficulty_level === filter)
+    : data;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[1536px] min-h-[calc(100vh-369px)] mx-auto px-4 md:px-10 gap-6 py-12">
-      <ScrollToTop/>
-      {data.map((singleData) => (
-        <div
-          key={singleData._id}
-          className="w-full max-w-sm mx-auto rounded-lg h-[420px] flex flex-col overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800"
+    <div>
+      <ScrollToTop />
+      {/* filter by difficulty level  */}
+      <div className="w-full flex justify-end max-w-[1536px] mx-auto px-4 md:px-10">
+        <select
+          onChange={(e) => {
+            setFilter(e.target.value);
+          }}
+          value={filter}
+          name="difficulty_level"
+          id="difficulty_level"
+          className="rounded-lg btn bg-[#1979C1] border-none text-white outline-none"
         >
-          <div>
-          <img
-            className="object-cover object-center border-b-[1px] border-gray-500 w-full h-44"
-            src={singleData?.img_url}
-            alt="Assignment Picture"
-          />
-          </div>
+          <option value="">Filter By Difficlty Level</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[1536px] min-h-[calc(100vh-369px)] mx-auto px-4 md:px-10 gap-6 py-12">
+        {filteredAssignments.map((singleData) => (
+          <div
+            key={singleData._id}
+            className="w-full max-w-sm mx-auto rounded-lg h-[420px] flex flex-col overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800"
+          >
+            <div>
+              <img
+                className="object-cover object-center border-b-[1px] border-gray-500 w-full h-44"
+                src={singleData?.img_url}
+                alt="Assignment Picture"
+              />
+            </div>
 
-          <div className="flex flex-col justify-between h-full px-6 py-4">
-            <div className="flex justify-between items-center">
-              <h1 className="text-xl font-semibold">
-                {singleData.assignment_title}
-              </h1>
-              <span
-                className={`px-3 py-1 text-xs
+            <div className="flex flex-col justify-between h-full px-6 py-4">
+              <div className="flex justify-between items-center">
+                <h1 className="text-xl font-semibold">
+                  {singleData.assignment_title}
+                </h1>
+                <span
+                  className={`px-3 py-1 text-xs
               ${
                 singleData.difficulty_level === "Easy" &&
                 "text-green-500 bg-green-100/60"
@@ -101,42 +127,45 @@ const Assignments = () => {
                 "text-red-500 bg-red-100/60"
               }
               text-blue-800 uppercase bg-blue-200 rounded-full`}
-              >
-                {singleData?.difficulty_level}
-              </span>
-            </div>
-            <div className="flex flex-col justify-between">
-              <div className="mt-4">
-                <h1 className="font-medium pb-2">Marks: <span>{singleData.marks}</span></h1>
-                <h1 title={singleData.description} className="text-sm">
-                  {singleData.description.slice(0, 60)}..
-                </h1>
+                >
+                  {singleData?.difficulty_level}
+                </span>
               </div>
+              <div className="flex flex-col justify-between">
+                <div className="mt-4">
+                  <h1 className="font-medium pb-2">
+                    Marks: <span>{singleData.marks}</span>
+                  </h1>
+                  <h1 title={singleData.description} className="text-sm">
+                    {singleData.description.slice(0, 60)}..
+                  </h1>
+                </div>
 
-              <div className="flex items-center h-full justify-between mt-4 text-gray-700 dark:text-gray-200">
-                <Link to={`/details/${singleData._id}`}>
-                  <button className="btn bg-[#1979C1] text-white border-none">
-                    View Assignment
-                  </button>
-                </Link>
-                <div className="flex text-2xl items-center gap-2">
-                  <Link to={`/update-assignment/${singleData._id}`}>
-                    <span className="cursor-pointer text-[#1979C1]">
-                      <CiEdit />
-                    </span>
+                <div className="flex items-center h-full justify-between mt-4 text-gray-700 dark:text-gray-200">
+                  <Link to={`/details/${singleData._id}`}>
+                    <button className="btn bg-[#1979C1] text-white border-none">
+                      View Assignment
+                    </button>
                   </Link>
-                  <span
-                    onClick={() => handleDelete(singleData._id)}
-                    className="cursor-pointer text-red-500"
-                  >
-                    <MdDelete />
-                  </span>
+                  <div className="flex text-2xl items-center gap-2">
+                    <Link to={`/update-assignment/${singleData._id}`}>
+                      <span className="cursor-pointer text-[#1979C1]">
+                        <CiEdit />
+                      </span>
+                    </Link>
+                    <span
+                      onClick={() => handleDelete(singleData._id)}
+                      className="cursor-pointer text-red-500"
+                    >
+                      <MdDelete />
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
