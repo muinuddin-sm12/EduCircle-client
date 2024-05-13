@@ -5,6 +5,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import ScrollToTop from "../components/ScrollToTop";
 
 const CreateAssignment =  () => {
   const { user } = useContext(AuthContext);
@@ -31,7 +32,7 @@ const CreateAssignment =  () => {
     };
     console.log(assignmentData);
     try{
-      const {data} = await axios.post('http://localhost:7000/assignments', assignmentData)
+      const {data} = await axios.post('https://edu-circle-server.vercel.app/assignments', assignmentData)
       console.log(data)
       toast.success('Assignment Created Successfully!')
       form.reset()
@@ -42,6 +43,7 @@ const CreateAssignment =  () => {
   };
   return (
     <div className="flex justify-center text-sans items-center py-12">
+      <ScrollToTop/>
       <section className=" p-2 md:p-6 mx-auto border border-[#1979c1] rounded-md shadow-md ">
         <h2 className="text-lg font-semibold  capitalize ">
           Create an Assignment
@@ -58,7 +60,7 @@ const CreateAssignment =  () => {
                 name="assignment_title"
                 type="text"
                 required
-                className="block w-full px-4 py-2 mt-2  border border-gray-600 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
+                className="w-full px-4 py-2 mt-2  border border-gray-600 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>
             <div>

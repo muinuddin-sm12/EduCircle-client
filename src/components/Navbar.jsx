@@ -16,7 +16,8 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="navbar sticky top-0 bg-base-100 z-[99] max-w-[1536px] mx-auto px-4 md:px-10 py-5 mb-2">
+    <div className="sticky top-0 w-full bg-base-100  z-[99]">
+      <div className="navbar  max-w-[1536px] mx-auto px-4 md:px-10 py-5 mb-2">
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -161,7 +162,7 @@ const Navbar = () => {
             </div>
           </div>
         ) : (
-          <div className="flex bg-[#1979C1] px-6 py-2 rounded-full items-center gap-3">
+          <div className="flex bg-[#1979C1] text-white  px-6 py-2 rounded-full items-center gap-3">
             <Link to="/login">
               <button>Login</button>
             </Link>
@@ -177,6 +178,7 @@ const Navbar = () => {
           <DropDownProfile />
         </div>
       )}
+    </div>
     </div>
   );
 };

@@ -5,9 +5,9 @@ import feature4 from "../assets/images/feature-4.png";
 
 const Feature = () => {
   return (
-    <div className="py-16 mx-auto px-4 md:px-10 bg-base-200 my-20">
+    <div className="py-16 mx-auto px-4 md:px-10 bg-base-200 my-6 lg:my-20">
         <p className=" text-center text-2xl font-semibold sm:text-3xl mb-12">Features</p>
-      <div className="flex flex-wrap gap-6 max-w-[936px] mx-auto items-center justify-between">
+      <div className="flex flex-wrap justify-center gap-6 max-w-[936px] mx-auto">
         <div  className="flex flex-col h-[250px] w-[200px] justify-between items-center px-2 py-8 rounded-2xl border border-[#1979C1] hover:bg-base-100">
           <img className="w-36" src={feature1} alt="" />
           <h1>Privacy Controls</h1>

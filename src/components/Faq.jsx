@@ -1,6 +1,6 @@
 const Faq = () => {
   return (
-    <section className="dark:bg-gray-100 dark:text-gray-800 max-w-[936px] mx-auto px-4 lg:px-20 my-20">
+    <section className="dark:bg-gray-100 dark:text-gray-800 max-w-[936px] mx-auto px-4 lg:px-20 my6  lg:my-20">
       <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
         <div className="w-full text-center">
           <h2 className="text-2xl font-semibold sm:text-3xl">

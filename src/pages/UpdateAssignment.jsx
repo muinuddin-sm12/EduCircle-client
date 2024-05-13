@@ -25,7 +25,7 @@ const UpdateAssignment = () => {
         const updateData = {assignment_title, marks, img_url,difficulty_level, due_date, description}
         // console.log(updateData)
         try {
-            const {data} = await axios.put(`http://localhost:7000/assignments/${_id}`, updateData)
+            const {data} = await axios.put(`https://edu-circle-server.vercel.app/assignments/${_id}`, updateData)
             console.log(data)
             toast.success('Assignment Updated!')
             navigate('/assignments')

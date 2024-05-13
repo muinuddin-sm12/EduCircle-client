@@ -6,6 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Assignments = () => {
   const { user } = useContext(AuthContext);
@@ -14,14 +15,14 @@ const Assignments = () => {
     getData();
   }, [user]);
   const getData = async () => {
-    const { data } = await axios("http://localhost:7000/assignments");
+    const { data } = await axios("https://edu-circle-server.vercel.app/assignments");
     setData(data);
   };
   // delete assignment
   const handleDelete = async (id) => {
     try {
       // Fetch the assignment data
-      const response = await fetch(`http://localhost:7000/assignments/${id}`);
+      const response = await fetch(`https://edu-circle-server.vercel.app/assignments/${id}`);
       if (!response.ok) {
         throw new Error("Failed to fetch assignment data");
       }
@@ -48,7 +49,7 @@ const Assignments = () => {
           });
           try {
             const { data } = await axios.delete(
-              `http://localhost:7000/assignments/${id}`
+              `https://edu-circle-server.vercel.app/assignments/${id}`
             );
             console.log(data);
             // confirm toast
@@ -65,19 +66,22 @@ const Assignments = () => {
     }
   };
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[1536px] mx-auto px-4 md:px-10 gap-6 py-12">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[1536px] min-h-[calc(100vh-369px)] mx-auto px-4 md:px-10 gap-6 py-12">
+      <ScrollToTop/>
       {data.map((singleData) => (
         <div
           key={singleData._id}
-          className="w-full max-w-sm mx-auto rounded-lg overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800"
+          className="w-full max-w-sm mx-auto rounded-lg h-[420px] flex flex-col overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800"
         >
+          <div>
           <img
             className="object-cover object-center border-b-[1px] border-gray-500 w-full h-44"
             src={singleData?.img_url}
             alt="Assignment Picture"
           />
+          </div>
 
-          <div className="flex flex-col px-6 py-4">
+          <div className="flex flex-col justify-between h-full px-6 py-4">
             <div className="flex justify-between items-center">
               <h1 className="text-xl font-semibold">
                 {singleData.assignment_title}
@@ -101,8 +105,7 @@ const Assignments = () => {
                 {singleData?.difficulty_level}
               </span>
             </div>
-
-            <div>
+            <div className="flex flex-col justify-between">
               <div className="mt-4">
                 <h1 className="font-medium pb-2">Marks: <span>{singleData.marks}</span></h1>
                 <h1 title={singleData.description} className="text-sm">
@@ -111,9 +114,9 @@ const Assignments = () => {
               </div>
 
               <div className="flex items-center h-full justify-between mt-4 text-gray-700 dark:text-gray-200">
-                <Link>
+                <Link to={`/details/${singleData._id}`}>
                   <button className="btn bg-[#1979C1] text-white border-none">
-                    View Details
+                    View Assignment
                   </button>
                 </Link>
                 <div className="flex text-2xl items-center gap-2">
