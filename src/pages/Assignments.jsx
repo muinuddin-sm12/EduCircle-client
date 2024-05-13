@@ -77,7 +77,7 @@ const Assignments = () => {
     <div>
       <ScrollToTop />
       {/* filter by difficulty level  */}
-      <div className="w-full flex justify-end max-w-[1536px] mx-auto px-4 md:px-10">
+      <div className="w-full flex justify-end max-w-[1536px] mx-auto px-4 md:px-10 mt-8">
         <select
           onChange={(e) => {
             setFilter(e.target.value);

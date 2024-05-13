@@ -1,8 +1,29 @@
-# React + Vite
+# EduCircle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Unlock your potential with interactive learning and peer feedback!
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Responsiveness
+- Good user experience
+- Cross platform
+- User Register and Login
+- Data add and delete
+
+## NPM Packages
+
+- [React-datepicket](https://www.npmjs.com/package/react-datepicker)
+- [Swiper-slider](https://swiperjs.com/)
+- [React-spinner](https://www.npmjs.com/package/react-spinners)
+- [React-hot-toast](https://www.npmjs.com/package/react-hot-toast)
+- [Axios](https://www.npmjs.com/package/axios)
+- [React-icons](https://react-icons.github.io/react-icons/)
+- [Sweetalert2](https://sweetalert2.github.io/#examples)
+
+## Demo
+
+- Live Preview: https://educircle-b9a11.web.app/
+
+## Authors
+
+- [@muinuddin-sm12](https://www.github.com/muinuddin-sm12)
