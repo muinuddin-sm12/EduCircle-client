@@ -13,7 +13,7 @@ const MyAttempt = () => {
   }, [user]);
   // console.log(user.email);
   return (
-    <div className="overflow-x-auto bg-base-200 max-w-[1200px] min-h-[calc(100vh-499px)] mx-auto mt-14 mb-20">
+    <div className="overflow-x-auto bg-base-200 max-w-[1200px] min-h-[calc(100vh-499px)] mx-auto my-8 md:mt-14 md:mb-20">
       <table className="table">
         {/* head */}
         <thead>
@@ -22,7 +22,7 @@ const MyAttempt = () => {
               My List : {data?.length}
             </th>
           </tr>
-          <tr className="text-sm text-left">
+          <tr className="text-base text-left">
             <th></th>
             <th className="py-2">Title</th>
             <th className="py-2">Status</th>

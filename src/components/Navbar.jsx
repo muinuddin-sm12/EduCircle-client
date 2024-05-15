@@ -166,8 +166,8 @@ const Navbar = () => {
             <Link to="/login">
               <button>Login</button>
             </Link>
-            <div className="text-white">{"|"}</div>
-            <Link to="/register">
+            <div className="text-white hidden md:block">{"|"}</div>
+            <Link to="/register" className="hidden md:block">
               <button>Register</button>
             </Link>
           </div>
