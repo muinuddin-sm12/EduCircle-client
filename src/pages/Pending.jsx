@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Pending = () => {
+  const { user } = useContext(AuthContext);
   const fetchData = useLoaderData();
-  const [data] = useState(fetchData);
+  const [data] = useState(
+    fetchData.filter((item) => item.status === "pending")
+  );
+  const handleGiveMark = () => {
+      return toast.error("Invalid action (you submited this assignment)");
+  };
   return (
     <div className="grid grid-cols-1 bg-base-200 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-[1536px] min-h-[calc(100vh-369px)] mx-auto px-4 md:px-10 gap-6 py-12">
       {data.length > 0 ? (
@@ -15,12 +23,30 @@ const Pending = () => {
             {/* Add your content here */}
             <div className="p-4">
               <h2 className="text-xl font-bold">{singleData?.title}</h2>
-              <h1 className="pt-2">Examinee Name: {singleData?.examineeName}</h1>
+              <h1 className="pt-2">
+                Examinee Name: {singleData?.examineeName}
+              </h1>
               <p className="text-sm">
-                Assignment Marks: <span className="text-base font-semibold">{singleData?.mark}</span>
+                Assignment Marks:{" "}
+                <span className="text-base font-semibold">
+                  {singleData?.mark}
+                </span>
               </p>
               <div className="flex justify-end items-end">
-                <Link to={`/give-mark/${singleData?._id}`}><button className="btn bg-[#1979C1] text-white mt-6">Give Mark</button></Link>
+                {user.email === singleData.email ? (
+                  <button
+                    onClick={handleGiveMark}
+                    className="btn bg-[#1979C1] text-white mt-6"
+                  >
+                    Give Mark
+                  </button>
+                ) : (
+                  <Link to={`/give-mark/${singleData?._id}`}>
+                    <button className="btn bg-[#1979C1] text-white mt-6">
+                      Give Mark
+                    </button>
+                  </Link>
+                )}{" "}
               </div>
             </div>
           </div>

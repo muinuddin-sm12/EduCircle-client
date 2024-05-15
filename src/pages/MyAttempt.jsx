@@ -13,7 +13,7 @@ const MyAttempt = () => {
   }, [user]);
   // console.log(user.email);
   return (
-    <div className="overflow-x-auto bg-base-200 max-w-[800px] min-h-[calc(100vh-499px)] mx-auto mt-14 mb-20">
+    <div className="overflow-x-auto bg-base-200 max-w-[1200px] min-h-[calc(100vh-499px)] mx-auto mt-14 mb-20">
       <table className="table">
         {/* head */}
         <thead>
@@ -37,7 +37,7 @@ const MyAttempt = () => {
           {data.map((singleData) => (
             <tr key={singleData?._id}>
               <td>
-                <div className="w-24 h-20 bg-sky-200 rounded-md overflow-hidden">
+                <div className="w-[120px] h-20 bg-sky-200 rounded-md overflow-hidden">
                   <img
                     className="object-cover object-center w-full h-full"
                     src={singleData?.img}
@@ -45,11 +45,11 @@ const MyAttempt = () => {
                   />
                 </div>
               </td>
-              <td className="font-bold">{singleData?.title}</td>
-              <td className="text-sm opacity-70">{singleData?.status}</td>
-              <td className="text-sm opacity-70">{singleData?.mark}</td>
-              <td className="text-sm opacity-70">----</td>
-              <td className="text-sm opacity-70">----</td>
+              <td className="font font-medium">{singleData?.title}</td>
+              <td className={`text-sm ${singleData?.status === 'pending' && 'text-yellow-500' } ${singleData?.status === 'completed' && 'text-green-500'} font-semibold`}>{singleData?.status}</td>
+              <td className="text-sm">{singleData?.mark}</td>
+              <td className="text-sm">{singleData?.obtain_mark || '-----'}</td>
+              <td title={singleData?.feedback} className="text-sm cursor-pointer">{singleData?.feedback?.slice(0, 40) || '-----'}</td>
             </tr>
           ))}
         </tbody>
