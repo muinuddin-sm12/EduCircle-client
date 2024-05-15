@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
@@ -13,22 +14,23 @@ const Assignments = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     getData();
   }, [user, filter]);
   const getData = async () => {
-    setLoading(true)
-    try {const { data } = await axios(
-      "https://edu-circle-server.vercel.app/assignments"
-    );
-    setData(data);
-  }catch(err){
-    console.log(err.message)
-  }finally{
-    setLoading(false)
-  }
-};
+    setLoading(true);
+    try {
+      const { data } = await axios(
+        "https://edu-circle-server.vercel.app/assignments"
+      );
+      setData(data);
+    } catch (err) {
+      // console.log(err.message)
+    } finally {
+      setLoading(false);
+    }
+  };
   // delete assignment
   const handleDelete = async (id) => {
     try {
@@ -64,10 +66,8 @@ const Assignments = () => {
             const { data } = await axios.delete(
               `https://edu-circle-server.vercel.app/assignments/${id}`
             );
-            console.log(data);
-            // confirm toast
+            // console.log(data);
             toast.success("Delete Successful");
-            // refresh ui to show latest data
             getData();
           } catch (err) {
             toast.error(err.message);
@@ -81,7 +81,14 @@ const Assignments = () => {
   const filteredAssignments = filter
     ? data.filter((assignment) => assignment.difficulty_level === filter)
     : data;
-  if(loading) return <div className=" w-full min-h-[calc(100vh-369px)] flex items-center justify-center"><span><CircleLoader color="#1979C1"/></span></div>
+  if (loading)
+    return (
+      <div className=" w-full min-h-[calc(100vh-369px)] flex items-center justify-center">
+        <span>
+          <CircleLoader color="#1979C1" />
+        </span>
+      </div>
+    );
   return (
     <div>
       <ScrollToTop />

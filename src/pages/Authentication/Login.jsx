@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
@@ -15,7 +17,7 @@ const Login = () => {
       navigate("/");
     }
   }, [navigate, user]);
-  console.log(user)
+  // console.log(user)
   const location = useLocation();
   const from = location.state || "/";
   // Google SignIn
@@ -26,7 +28,7 @@ const Login = () => {
         "https://edu-circle-server.vercel.app/jwt",
         { email: result?.user?.email },{withCredentials:true}
       );
-      console.log(data)
+      // console.log(data)
       toast.success("Signin Successful");
       navigate(from, { replace: true });
     } catch (err) {
@@ -41,12 +43,12 @@ const Login = () => {
     const pass = form.password.value;
     try {
       const result = await signIn(email, pass);
-      console.log(result);
+      // console.log(result);
       const { data } = await axios.post(
         "https://edu-circle-server.vercel.app/jwt",
         { email: result?.user?.email },{withCredentials:true}
       );
-      console.log(data)
+      // console.log(data)
       navigate(from, { replace: true });
       toast.success("SignIn Successful");
     } catch (err) {

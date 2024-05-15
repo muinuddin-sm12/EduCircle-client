@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
@@ -26,11 +27,11 @@ const UpdateAssignment = () => {
         // console.log(updateData)
         try {
             const {data} = await axios.put(`https://edu-circle-server.vercel.app/assignments/${_id}`, updateData)
-            console.log(data)
+            // console.log(data)
             toast.success('Assignment Updated!')
             navigate('/assignments')
         }catch(err){
-            console.log(err.message)
+            // console.log(err.message)
         }
     }
     return (

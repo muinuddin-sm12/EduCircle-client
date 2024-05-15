@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
 import ScrollToTop from "../components/ScrollToTop";
 import { useEffect, useState } from "react";
@@ -35,11 +36,11 @@ const GiveMark = () => {
       const giveMarkData = {obtain_mark, feedback, status:'completed'}
       try {
         const {data} = await axios.put(`https://edu-circle-server.vercel.app/take/${id}`, giveMarkData)
-        console.log(data)
+        // console.log(data)
         toast.success('Mark given successfully!')
         form.reset()
     }catch(err){
-        console.log(err.message)
+        // console.log(err.message)
     }
     }
     // console.log(data)

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ScrollToTop from "../components/ScrollToTop";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
@@ -35,12 +36,12 @@ const TakeAssignment = () => {
     // console.log(submissionData);
     try {
       const {data} = await axios.post('https://edu-circle-server.vercel.app/take', submissionData)
-      console.log(data)
+      // console.log(data)
       toast.success('Assignment taken!')
       form.reset()
       navigate('/my-attempt')
     }catch(err){
-      console.log(err.message)
+      // console.log(err.message)
     }
   };
   return (

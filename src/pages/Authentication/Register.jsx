@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -42,7 +43,7 @@ const Register = () => {
         "https://edu-circle-server.vercel.app/jwt",
         { email: result?.user?.email },{withCredentials:true}
       );
-      console.log(data)
+      // console.log(data)
       
       navigate(from, { replace: true });
       toast.success("Signup Successful");
@@ -59,7 +60,7 @@ const Register = () => {
         "https://edu-circle-server.vercel.app/jwt",
         { email: result?.user?.email },{withCredentials:true}
       );
-      console.log(data)
+      // console.log(data)
 
       toast.success("Signin Successful");
       navigate(from, { replace: true });

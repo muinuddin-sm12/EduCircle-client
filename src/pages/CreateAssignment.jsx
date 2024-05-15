@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -30,15 +31,15 @@ const CreateAssignment =  () => {
       due_date,
       description,
     };
-    console.log(assignmentData);
+    // console.log(assignmentData);
     try{
       const {data} = await axios.post('https://edu-circle-server.vercel.app/assignments', assignmentData)
-      console.log(data)
+      // console.log(data)
       toast.success('Assignment Created Successfully!')
       form.reset()
       navigate('/assignments')
     }catch(err){
-      console.log(err.message)
+      // console.log(err.message)
     }
   };
   return (
