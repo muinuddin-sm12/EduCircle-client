@@ -7,20 +7,28 @@ import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import ScrollToTop from "../components/ScrollToTop";
+import { CircleLoader } from "react-spinners";
 
 const Assignments = () => {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     getData();
   }, [user, filter]);
   const getData = async () => {
-    const { data } = await axios(
+    setLoading(true)
+    try {const { data } = await axios(
       "https://edu-circle-server.vercel.app/assignments"
     );
     setData(data);
-  };
+  }catch(err){
+    console.log(err.message)
+  }finally{
+    setLoading(false)
+  }
+};
   // delete assignment
   const handleDelete = async (id) => {
     try {
@@ -73,6 +81,7 @@ const Assignments = () => {
   const filteredAssignments = filter
     ? data.filter((assignment) => assignment.difficulty_level === filter)
     : data;
+  if(loading) return <div className=" w-full min-h-[calc(100vh-369px)] flex items-center justify-center"><span><CircleLoader color="#1979C1"/></span></div>
   return (
     <div>
       <ScrollToTop />
@@ -97,7 +106,7 @@ const Assignments = () => {
         {filteredAssignments.map((singleData) => (
           <div
             key={singleData._id}
-            className="w-full max-w-sm mx-auto rounded-lg h-[420px] flex flex-col overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800"
+            className="w-full max-w-sm mx-auto rounded-lg h-[420px] flex flex-col overflow-hidden  border-[1px] border-gray-500 shadow-lg dark:bg-gray-800 hover:border-[#FCB138] hover:scale-105 duration-200"
           >
             <div>
               <img

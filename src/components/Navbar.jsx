@@ -83,7 +83,7 @@ const Navbar = () => {
               {user && (
                 <>
                   <NavLink
-                    to="/pending-assignments"
+                    to="/pending"
                     className={({ isActive }) =>
                       isActive
                         ? "text-[#36a3f7] border border-[#36a3f7] rounded-md px-2 py-1"
@@ -132,7 +132,7 @@ const Navbar = () => {
           )}
           {user && (
             <NavLink
-              to="/pending-assignments"
+              to="/pending"
               className={({ isActive }) =>
                 isActive ? "text-[#08D5FF] px-2 py-1" : ""
               }

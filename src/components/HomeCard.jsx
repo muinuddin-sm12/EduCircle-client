@@ -20,7 +20,7 @@ const HomeCard = () => {
         {data.map((singleData) => (
           <div
             key={singleData._id}
-            className="w-full max-w-sm mx-auto flex h-[420px] flex-col rounded-lg overflow-hidden border-[1px]  border-gray-500 shadow-lg dark:bg-gray-800"
+            className="w-full max-w-sm mx-auto flex h-[420px] flex-col rounded-lg overflow-hidden border-[1px]  border-gray-500 shadow-lg hover:border-[#FCB138] hover:scale-105 duration-200 "
           >
             <div>
             <img

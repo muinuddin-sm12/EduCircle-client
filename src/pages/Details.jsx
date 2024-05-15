@@ -3,7 +3,7 @@ import ScrollToTop from "../components/ScrollToTop";
 
 const Details = () => {
   const assignmentData = useLoaderData();
-  const { assignment_title, img_url, description, marks, difficulty_level } =
+  const {_id, assignment_title, img_url, description, marks, difficulty_level } =
     assignmentData;
   return (
     <section className="dark:bg-gray-100 dark:text-gray-800 md:py-14 bg-base-200">
@@ -31,7 +31,7 @@ const Details = () => {
             </p>
           </div>
           <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-            <Link to='/take-assignment' className="btn bg-[#1979C1] text-white">Take Assignment</Link>
+            <Link to={`/take-assignment?id=${_id}`} className="btn bg-[#1979C1] text-white">Take Assignment</Link>
           </div>
         </div>
       </div>

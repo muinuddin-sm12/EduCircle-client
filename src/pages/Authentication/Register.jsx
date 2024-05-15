@@ -4,10 +4,12 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 import logo from "../../assets/images/logo.png";
 import toast from "react-hot-toast";
+import { CircleLoader } from "react-spinners";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { signInWithGoogle, createUser, updateUserProfile, user, setUser, } =
+  const { signInWithGoogle, createUser, updateUserProfile, setUser, loading } =
     useContext(AuthContext);
     const [error, setError] = useState("");
     const location = useLocation();
@@ -33,9 +35,15 @@ const Register = () => {
       setError("");
     try {
       const result = await createUser(email, pass);
-      console.log(result);
       await updateUserProfile(name, photo);
-      setUser({ ...user, photoURL: photo, displayName: name });
+      setUser({ ...result?.user, photoURL: photo, displayName: name });
+      
+      const { data } = await axios.post(
+        "https://edu-circle-server.vercel.app/jwt",
+        { email: result?.user?.email },{withCredentials:true}
+      );
+      console.log(data)
+      
       navigate(from, { replace: true });
       toast.success("Signup Successful");
     } catch (err) {
@@ -45,13 +53,22 @@ const Register = () => {
   // Google Signin
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+
+      const { data } = await axios.post(
+        "https://edu-circle-server.vercel.app/jwt",
+        { email: result?.user?.email },{withCredentials:true}
+      );
+      console.log(data)
+
       toast.success("Signin Successful");
       navigate(from, { replace: true });
     } catch (err) {
       toast.error(err?.message);
     }
   };
+  if(loading) return <div className=" w-full min-h-[calc(100vh-369px)] flex items-center justify-center"><span><CircleLoader color="#1979C1"/></span></div>
+
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] py-16">
       <div className=" w-full  mx-auto overflow-hidden border rounded-lg shadow-lg  lg:max-w-lg ">
@@ -115,7 +132,7 @@ const Register = () => {
                 id="name"
                 autoComplete="name"
                 name="name"
-                className="block w-full px-4 py-2 text-gray-700 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="text"
               />
             </div>
@@ -130,7 +147,7 @@ const Register = () => {
                 id="photo"
                 autoComplete="photo"
                 name="photo"
-                className="block w-full px-4 py-2 text-gray-700 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="text"
               />
             </div>
@@ -145,7 +162,7 @@ const Register = () => {
                 id="LoggingEmailAddress"
                 autoComplete="email"
                 name="email"
-                className="block w-full px-4 py-2 text-gray-700 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="email"
               />
             </div>
@@ -164,7 +181,7 @@ const Register = () => {
                 id="loggingPassword"
                 autoComplete="current-password"
                 name="password"
-                className="block w-full px-4 py-2 text-gray-700 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
+                className="block w-full px-4 py-2 border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 type="password"
               />
             </div>

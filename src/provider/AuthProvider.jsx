@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { auth } from '../firebase/firebase.init'
+import axios from 'axios'
 // import { app } from '../firebase/firebase.init'
 
 export const AuthContext = createContext(null)
@@ -37,6 +38,7 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true)
+    await axios('https://edu-circle-server.vercel.app/logout', {withCredentials:true})
     return signOut(auth)
   }
 

@@ -10,6 +10,9 @@ import UpdateAssignment from "../pages/UpdateAssignment";
 import ErrorPage from "../pages/ErrorPage";
 import Details from "../pages/Details";
 import TakeAssignment from "../pages/TakeAssignment";
+import MyAttempt from "../pages/MyAttempt";
+import Pending from "../pages/Pending";
+import GiveMark from "../pages/GiveMark";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +75,38 @@ const router = createBrowserRouter([
             <TakeAssignment />
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/my-attempt",
+        element: (
+          <PrivateRoutes>
+            <MyAttempt />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/pending",
+        element: (
+          <PrivateRoutes>
+            <Pending />
+          </PrivateRoutes>
+        ),
+        loader: () =>
+          fetch("https://edu-circle-server.vercel.app/take").then((res) =>
+            res.json()
+          ),
+      },
+      {
+        path: "/give-mark/:id",
+        element: (
+          <PrivateRoutes>
+            <GiveMark></GiveMark>
+          </PrivateRoutes>
+        ),
+        loader: ( {params}) =>
+        fetch(`https://edu-circle-server.vercel.app/take/${params.id}`).then((res) =>
+            res.json()
+          ),
       },
     ],
   },
