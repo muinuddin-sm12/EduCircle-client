@@ -24,10 +24,10 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithGoogle();
-      const { data } = await axios.post(
-        "https://edu-circle-server.vercel.app/jwt",
-        { email: result?.user?.email },{withCredentials:true}
-      );
+      // const { data } = await axios.post(
+      //   "https://edu-circle-server.vercel.app/jwt",
+      //   { email: result?.user?.email },{withCredentials:true}
+      // );
       // console.log(data)
       toast.success("Signin Successful");
       navigate(from, { replace: true });

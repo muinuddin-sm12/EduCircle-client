@@ -39,10 +39,10 @@ const Register = () => {
       await updateUserProfile(name, photo);
       setUser({ ...result?.user, photoURL: photo, displayName: name });
       
-      const { data } = await axios.post(
-        "https://edu-circle-server.vercel.app/jwt",
-        { email: result?.user?.email },{withCredentials:true}
-      );
+      // const { data } = await axios.post(
+      //   "https://edu-circle-server.vercel.app/jwt",
+      //   { email: result?.user?.email },{withCredentials:true}
+      // );
       // console.log(data)
       
       navigate(from, { replace: true });
@@ -56,10 +56,10 @@ const Register = () => {
     try {
       const result = await signInWithGoogle();
 
-      const { data } = await axios.post(
-        "https://edu-circle-server.vercel.app/jwt",
-        { email: result?.user?.email },{withCredentials:true}
-      );
+      // const { data } = await axios.post(
+      //   "https://edu-circle-server.vercel.app/jwt",
+      //   { email: result?.user?.email },{withCredentials:true}
+      // );
       // console.log(data)
 
       toast.success("Signin Successful");
